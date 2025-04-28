@@ -27,3 +27,19 @@ Feature: UnitTestCases
     Scenario: Alert handling Validation
         Given Iam on RahulShettys Automation practise page
         Then Validate whether Alert is handled properly with assertions
+
+    Scenario: Web Table Handling_Get coursename based on price
+        Given Iam on RahulShettys Automation practise page
+        Then Web Table Validation - Get Course names based on price
+
+    Scenario: Fixed Web Table Handling_Validate total price
+        Given Iam on RahulShettys Automation practise page
+        Then Fixed Web Table Validation - Validate total price
+
+    Scenario: Mouse Hover validation
+        Given Iam on RahulShettys Automation practise page
+        Then Validate whether mouse is hovered and option is clicked
+
+    Scenario: Frame Validation
+        Given Iam on RahulShettys Automation practise page
+        Then Get all links present in the frame

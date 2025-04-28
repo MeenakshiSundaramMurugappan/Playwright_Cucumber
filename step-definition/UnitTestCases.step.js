@@ -179,7 +179,6 @@ Then(
       this.attach
     );
     let unitTestCasePage = await pageobjects.getUnitTestCasesPage();
-    let reusablePage = await pageobjects.getReusablePage();
 
     //********** Handle Alert *********//
     await unitTestCasePage.enterNameinNameTextBox(
@@ -196,17 +195,95 @@ Then(
     );
 
     await unitTestCasePage.enterNameinNameTextBox(
-        await testdata.getExcelData(this.featurename, this.tc_id, "Name")
-      );
-  
-      await unitTestCasePage.clickConfirmButton(
-        await testdata.getExcelData(
-          this.featurename,
-          this.tc_id,
-          "ExpectedConfirmMessage"
-        ),
-        await testdata.getExcelData(this.featurename, this.tc_id, "Name")
-      );
+      await testdata.getExcelData(this.featurename, this.tc_id, "Name")
+    );
 
+    await unitTestCasePage.clickConfirmButton(
+      await testdata.getExcelData(
+        this.featurename,
+        this.tc_id,
+        "ExpectedConfirmMessage"
+      ),
+      await testdata.getExcelData(this.featurename, this.tc_id, "Name")
+    );
   }
 );
+
+Then("Web Table Validation - Get Course names based on price", async function () {
+  //*********  Declaring page objects **********//
+  let pageobjects = new POmanager(
+    this.page,
+    this.context,
+    this.testcasename,
+    this.attach
+  );
+  let unitTestCasePage = await pageobjects.getUnitTestCasesPage();
+  let reusablePage = await pageobjects.getReusablePage();
+
+  //********** Get all Values from web table *********//
+
+  await unitTestCasePage.movetoMousehoverButton();
+  await unitTestCasePage.getDatafromcoursesTable(
+    await testdata.getExcelData(this.featurename, this.tc_id, "coursePrice")
+  );
+  await reusablePage.takePageScreenShot("WebTableContents");
+});
+
+Then("Fixed Web Table Validation - Validate total price", async function () {
+  //*********  Declaring page objects **********//
+  let pageobjects = new POmanager(
+    this.page,
+    this.context,
+    this.testcasename,
+    this.attach
+  );
+  let unitTestCasePage = await pageobjects.getUnitTestCasesPage();
+  let reusablePage = await pageobjects.getReusablePage();
+
+  //********** Get all Values from web table *********//
+
+  await unitTestCasePage.moveToWebTableHeader();
+  await unitTestCasePage.getAmountFromTable();
+  await reusablePage.takePageScreenShot("WebTableContents");
+});
+
+Then("Validate whether mouse is hovered and option is clicked", async function () {
+  //*********  Declaring page objects **********//
+  let pageobjects = new POmanager(
+    this.page,
+    this.context,
+    this.testcasename,
+    this.attach
+  );
+  let unitTestCasePage = await pageobjects.getUnitTestCasesPage();
+  let reusablePage = await pageobjects.getReusablePage();
+
+  //********** Get all Values from web table *********//
+
+  await unitTestCasePage.movetoMousehoverButton();
+  await unitTestCasePage.HoveronMouseHoverButton();
+  await reusablePage.takePageScreenShot("MoveHover");
+  await unitTestCasePage.clickTopHyperLink();
+  await unitTestCasePage.ValidateAutosuggestiveboxinViewport();
+});
+
+Then("Get all links present in the frame", async function () {
+  //*********  Declaring page objects **********//
+  let pageobjects = new POmanager(
+    this.page,
+    this.context,
+    this.testcasename,
+    this.attach
+  );
+  let unitTestCasePage = await pageobjects.getUnitTestCasesPage();
+  let reusablePage = await pageobjects.getReusablePage();
+
+  //********** Get all Values from web table *********//
+
+  await unitTestCasePage.movetoframe();
+  await unitTestCasePage.getAllLinksInFrame();
+  await unitTestCasePage.clickLearningpathsLink()
+  await unitTestCasePage.validatelearningpathHeader();
+  await unitTestCasePage.moveToJoinNowbtn();
+  await reusablePage.takePageScreenShot("frame");
+});
